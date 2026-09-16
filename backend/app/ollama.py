@@ -3,7 +3,12 @@ import httpx
 from app.config import OLLAMA_URL, MODEL
 
 
+import time
+
+
 async def ask_ollama(prompt: str):
+
+    start = time.time()
 
     payload = {
         "model": MODEL,
@@ -22,5 +27,13 @@ async def ask_ollama(prompt: str):
 
 
     data = response.json()
+
+
+    elapsed = time.time() - start
+
+    print(
+        f"⚡ Ollama response time: {elapsed:.2f}s"
+    )
+
 
     return data["response"]
